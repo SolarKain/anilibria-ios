@@ -38,6 +38,14 @@ final class CatalogViewController: InfinityCollectionViewController {
         self.navigationItem.title = L10n.Screen.Catalog.title
     }
 
+    override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+        self.collectionView.backgroundColor = colors.mainColor
+        self.searchButton.updateTint(color: colors.mainTextColor)
+        self.filterButton.updateTint(color: colors.mainTextColor)
+    }
+
     override func refresh() {
         super.refresh()
         self.handler.refresh()
@@ -74,7 +82,8 @@ extension CatalogViewController: CatalogViewBehavior {
     }
 
     func setFilter(active: Bool) {
-        self.filterButton.tintColor = active ? MainTheme.shared.red : MainTheme.shared.black
+        let colors = MainTheme.shared.colors
+        self.filterButton.tintColor = active ? colors.infoColor : colors.mainTextColor
     }
 
     func loadPageProgress() -> ActivityDisposable? {

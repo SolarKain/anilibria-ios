@@ -29,6 +29,11 @@ final class NewsViewController: InfinityCollectionViewController {
         self.navigationItem.title = L10n.Screen.News.title
     }
 
+    override func setAppearance() {
+        super.setAppearance()
+        self.collectionView.backgroundColor = currentTheme.colors.mainColor
+    }
+
     private func setupNavbar() {
         #if targetEnvironment(macCatalyst)
         self.navigationItem.setRightBarButtonItems([

@@ -5,14 +5,27 @@ public final class FilterTagCell: RippleViewCell {
     @IBOutlet var backView: UIView!
 
     private var bag: Any?
+    private var isFilterSelected: Bool = false
     private static let titleBuilder: AttributeStringBuilder = AttributeStringBuilder()
         .set(font: UIFont.font(ofSize: 15, weight: .regular))
 
     func configure(_ item: Selectable<String>) {
-        self.backView.backgroundColor = item.isSelected ? #colorLiteral(red: 0.707420184, green: 0, blue: 0, alpha: 1) : #colorLiteral(red: 0.9247149825, green: 0.9219169021, blue: 0.9385299683, alpha: 1)
-        self.titleLabel.textColor = item.isSelected ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        self.isFilterSelected = item.isSelected
         self.titleLabel.text = item.value
         self.subscribe(item)
+        self.setAppearance()
+    }
+
+    public override func setAppearance() {
+        super.setAppearance()
+        self.backgroundColor = .clear
+        let colors = currentTheme.colors
+        var defaultTitleColor: UIColor = .white
+        if !colors.isBlackTheme {
+            defaultTitleColor = .black
+        }
+        self.titleLabel.textColor = isFilterSelected ? .white : defaultTitleColor
+        self.backView.backgroundColor = isFilterSelected ? colors.noticeColor : colors.secondaryBackgroundColor
     }
 
     private func subscribe(_ item: Selectable<String>) {
@@ -29,8 +42,8 @@ public final class FilterTagCell: RippleViewCell {
 
     private func renderSelect(_ item: Selectable<String>) {
         UIView.animate(withDuration: 0.3) {
-            self.backView.backgroundColor = item.isSelected ? #colorLiteral(red: 0.707420184, green: 0, blue: 0, alpha: 1) : #colorLiteral(red: 0.9247149825, green: 0.9219169021, blue: 0.9385299683, alpha: 1)
-            self.titleLabel.textColor = item.isSelected ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            self.isFilterSelected = item.isSelected
+            self.setAppearance()
         }
     }
 }

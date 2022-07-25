@@ -29,9 +29,10 @@ final class BarButton: UIBarButtonItem {
                      image: UIImage,
                      activeImage: UIImage? = nil,
                      size: CGSize = .init(width: 30, height: 30),
-                     tintColor: UIColor = MainTheme.shared.black,
-                     rippleColor: UIColor = MainTheme.shared.black,
+                     tintColor: UIColor = MainTheme.shared.colors.secondaryBackgroundColor,
+                     rippleColor: UIColor = MainTheme.shared.colors.secondaryBackgroundColor,
                      imageEdge: UIEdgeInsets = .zero,
+                     customColor: UIColor? = nil,
                      action: ActionFunc?) {
         let button = RippleButton(type: type)
         button.frame = CGRect(origin: .zero, size: CGSize(width: size.width, height: 44))
@@ -53,12 +54,15 @@ final class BarButton: UIBarButtonItem {
         self.activeImage = activeImage
         self.didTapAction = action
         self.button = button
+        if let customColor = customColor {
+            button.imageView?.setImageColor(customColor)
+        }
         button.addTarget(self, action: #selector(self.didTap), for: .touchUpInside)
     }
 
     convenience init(text: String,
                      font: UIFont = UIFont.systemFont(ofSize: 15, weight: .bold),
-                     textColor: UIColor = MainTheme.shared.black,
+                     textColor: UIColor = MainTheme.shared.colors.secondaryBackgroundColor,
                      action: ActionFunc?) {
         let button = BarRippleButton(frame: .init(x: 0,
                                                   y: 0,
@@ -66,7 +70,7 @@ final class BarButton: UIBarButtonItem {
                                                   height: 44))
 
         button.titleLabel?.font = font
-        button.rippleColor = MainTheme.shared.black
+        button.rippleColor = MainTheme.shared.colors.secondaryBackgroundColor
         button.setTitle(text, for: .normal)
         button.setTitleColor(textColor, for: .normal)
         self.init(customView: button)
@@ -77,6 +81,11 @@ final class BarButton: UIBarButtonItem {
 
     func set(text: String) {
         self.button?.setTitle(text, for: .normal)
+    }
+
+    func updateTint(color: UIColor) {
+        button?.tintColor = color
+        button?.imageView?.setImageColor(color)
     }
 
     @objc func didTap() {

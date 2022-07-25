@@ -23,6 +23,13 @@ public final class PagerView: UIView {
         }
     }
 
+    public func setTitleColor(colors: ThemeColor) {
+        let proxy = UISegmentedControl.appearance()
+        proxy.selectedSegmentTintColor = colors.currentPageIndicatorTintColor
+        proxy.backgroundColor = colors.pageBackgroundColor
+        proxy.tintColor = colors.pageIndicatorTintColor
+    }
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupNib()

@@ -14,11 +14,11 @@ final class BlurPresentationController: UIPresentationController {
             let view = FractionVisualEffectView(effect: UIBlurEffect(style: .dark),
                                                 fraction: 0.3)
 
-            view.backgroundColor = MainTheme.shared.black.withAlphaComponent(0.4)
+            view.backgroundColor = MainTheme.shared.colors.secondaryBackgroundColor.withAlphaComponent(0.4)
             return view
         }
         let view = UIView()
-        view.backgroundColor = MainTheme.shared.black.withAlphaComponent(0.6)
+        view.backgroundColor = MainTheme.shared.colors.secondaryBackgroundColor.withAlphaComponent(0.6)
         return view
 
     }()

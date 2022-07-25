@@ -9,6 +9,7 @@ final class FilterViewController: BaseCollectionViewController {
     @IBOutlet var buttonsContainer: ShadowView!
     @IBOutlet var resetButton: RippleButton!
     @IBOutlet var applyButton: RippleButton!
+    @IBOutlet var borderedContainerView: BorderedView!
 
     var handler: FilterEventHandler!
 
@@ -34,6 +35,15 @@ final class FilterViewController: BaseCollectionViewController {
                 self?.collectionHeightConstraint.constant = height + 80
             }
         }
+    }
+
+    override func setAppearance() {
+        super.setAppearance()
+        self.view.backgroundColor = .clear
+        let colors = currentTheme.colors
+        self.collectionView.backgroundColor = colors.mainColor
+        self.buttonsContainer.backgroundColor = colors.mainColor
+        self.borderedContainerView.backgroundColor = colors.mainColor
     }
 
     @IBAction func backAction(_ sender: Any) {

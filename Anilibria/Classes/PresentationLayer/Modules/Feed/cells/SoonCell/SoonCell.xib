@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16092.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16082.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -48,7 +49,7 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKb-bD-WfM" customClass="RippleButton" customModule="Anilibria" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKb-bD-WfM" customClass="RippleButton" customModule="Anilibria" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
@@ -60,7 +61,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="RKb-bD-WfM" secondAttribute="trailing" id="H8t-zz-GS3"/>
                                     <constraint firstAttribute="trailing" secondItem="IzZ-i5-0cg" secondAttribute="trailing" id="Wc0-5U-Mmp"/>
@@ -112,7 +113,7 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDu-9C-dUw" customClass="RippleButton" customModule="Anilibria" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDu-9C-dUw" customClass="RippleButton" customModule="Anilibria" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="rippleColor">
@@ -124,7 +125,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="nDu-9C-dUw" secondAttribute="bottom" id="7ga-v5-fSv"/>
                                     <constraint firstAttribute="trailing" secondItem="nDu-9C-dUw" secondAttribute="trailing" id="dfi-cx-JbT"/>
@@ -166,6 +167,7 @@
                     </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="Yu3-sV-XOK"/>
             <constraints>
                 <constraint firstItem="loz-hK-L4C" firstAttribute="top" secondItem="maj-HU-ofO" secondAttribute="bottom" constant="8" id="2bV-a9-28D"/>
                 <constraint firstItem="maj-HU-ofO" firstAttribute="top" secondItem="Hyf-nN-9HK" secondAttribute="top" constant="9" id="9da-He-ZrR"/>
@@ -179,15 +181,21 @@
                 <constraint firstAttribute="trailing" secondItem="loz-hK-L4C" secondAttribute="trailing" id="qLV-hn-3uC"/>
                 <constraint firstItem="GKw-AV-9P2" firstAttribute="centerY" secondItem="loz-hK-L4C" secondAttribute="centerY" id="zgG-OS-kEc"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Yu3-sV-XOK"/>
             <size key="customSize" width="371" height="214"/>
             <connections>
                 <outlet property="collectionView" destination="loz-hK-L4C" id="Cyn-Dm-fJz"/>
+                <outlet property="leftArrow" destination="IzZ-i5-0cg" id="cyX-1i-LIl"/>
                 <outlet property="leftView" destination="GKw-AV-9P2" id="0eE-wI-Oq5"/>
+                <outlet property="rightArrow" destination="Awh-Ee-mTD" id="8lr-ji-bcF"/>
                 <outlet property="rightView" destination="nOf-aY-v4m" id="hdL-gT-k2d"/>
                 <outlet property="titleLabel" destination="maj-HU-ofO" id="OdD-Rn-C2H"/>
             </connections>
             <point key="canvasLocation" x="107.24637681159422" y="90.401785714285708"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

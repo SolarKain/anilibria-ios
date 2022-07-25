@@ -12,6 +12,11 @@ public final class LinkView: UIView {
         self.handler = handler
     }
 
+    func setAppearance(colors: ThemeColor) {
+        self.titleLabel.textColor = colors.mainTextColor
+        self.backgroundColor = colors.secondaryBackgroundColor
+    }
+
     func configure(_ data: LinkData) {
         self.data = data
         self.titleLabel.text = data.title

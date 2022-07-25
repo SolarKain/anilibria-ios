@@ -1,7 +1,9 @@
 import Foundation
 import IGListKit
 
-class BaseCollectionCell: UICollectionViewCell, ListAdapterDataSource {
+class BaseCollectionCell: UICollectionViewCell, ListAdapterDataSource, ViewTheme {
+    public var currentTheme: AppTheme = MainTheme.shared
+
     // MARK: - Outlets
 
     @IBOutlet var collectionView: UICollectionView!
@@ -36,6 +38,22 @@ class BaseCollectionCell: UICollectionViewCell, ListAdapterDataSource {
     func setup() {
         self.adapter.collectionView = self.collectionView
         self.adapter.dataSource = self
+        self.setAppearance()
+    }
+
+    public func setAppearance() {
+        self.backgroundColor = currentTheme.colors.mainColor
+    }
+
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let newTheme: AppTheme
+        if traitCollection.userInterfaceStyle == .light {
+            newTheme = MainTheme(type: .light)
+        } else {
+            newTheme = MainTheme(type: .dark)
+        }
+        self.currentTheme = newTheme
+        self.setAppearance()
     }
 
     // MARK: - Methods

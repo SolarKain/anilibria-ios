@@ -5,6 +5,7 @@ class BaseViewController: UIViewController, WaitingBehavior, LanguageBehavior {
     let disposeBag = DisposeBag()
 
     public var statusBarStyle: UIStatusBarStyle = .default
+    public var currentTheme: AppTheme = MainTheme.shared
 
     deinit {
         print("[D] \(self) destroyed")
@@ -25,6 +26,7 @@ class BaseViewController: UIViewController, WaitingBehavior, LanguageBehavior {
         super.viewDidLoad()
         self.setupBackButton()
         self.setupStrings()
+        self.setAppearance()
     }
 
     func initialize() {}
@@ -46,11 +48,37 @@ class BaseViewController: UIViewController, WaitingBehavior, LanguageBehavior {
                                                                 action: nil)
     }
 
+    override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let newTheme: AppTheme
+        if traitCollection.userInterfaceStyle == .light {
+            newTheme = MainTheme(type: .light)
+        } else {
+            newTheme = MainTheme(type: .dark)
+        }
+        self.currentTheme = newTheme
+        MainTheme.shared = newTheme
+        self.setAppearance()
+    }
+
     // MARK: - App Terminated
 
     func addTermenateAppObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.appWillTerminate),
                                                name: UIApplication.willTerminateNotification, object: nil)
+    }
+
+    func setAppearance() {
+        currentTheme.apply()
+        let colors = currentTheme.colors
+        let navbar = self.navigationController?.navigationBar
+        self.view.backgroundColor = colors.mainColor
+        navbar?.titleTextAttributes = [
+            .foregroundColor: colors.mainTextColor,
+            .font: UIFont.font(ofSize: 17, weight: .medium)
+        ]
+        navbar?.backgroundColor = colors.mainColor
+        navbar?.barTintColor = colors.mainColor
     }
 
     @objc func appWillTerminate() {}

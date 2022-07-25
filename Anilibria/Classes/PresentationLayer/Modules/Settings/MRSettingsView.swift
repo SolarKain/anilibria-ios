@@ -8,6 +8,12 @@ final class SettingsViewController: BaseViewController {
     @IBOutlet var appVersionLabel: UILabel!
     @IBOutlet var globalNotifySwitch: UISwitch!
 
+    @IBOutlet var notificationsView: BorderedView!
+    @IBOutlet var notificationsTitle: UILabel!
+
+    @IBOutlet var commonSettingsView: BorderedView!
+    @IBOutlet var qualityLabel: UILabel!
+    @IBOutlet var aboutView: BorderedView!
     var handler: SettingsEventHandler!
 
     // MARK: - Life cycle
@@ -20,6 +26,19 @@ final class SettingsViewController: BaseViewController {
     override func setupStrings() {
         super.setupStrings()
         self.navigationItem.title = L10n.Screen.Settings.title
+    }
+
+    override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+
+        self.notificationsView.backgroundColor = colors.secondaryBackgroundColor
+        self.commonSettingsView.backgroundColor = colors.secondaryBackgroundColor
+        self.aboutView.backgroundColor = colors.secondaryBackgroundColor
+
+        self.notificationsTitle.textColor = colors.mainTextColor
+        self.qualityLabel.textColor = colors.mainTextColor
+        self.appNameLabel.textColor = colors.mainTextColor
     }
 
     @IBAction func qualityAction(_ sender: Any) {

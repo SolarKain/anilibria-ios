@@ -128,7 +128,9 @@ public class RippleManager {
     }
 }
 
-open class RippleViewCell: UICollectionViewCell {
+open class RippleViewCell: UICollectionViewCell, ViewTheme {
+    public var currentTheme: AppTheme = MainTheme.shared
+
     public lazy var rippleManager: RippleManager = { [unowned self] in
         RippleManager(attatch: self)
     }()
@@ -150,6 +152,7 @@ open class RippleViewCell: UICollectionViewCell {
 
     open override func prepareForReuse() {
         super.prepareForReuse()
+        self.setAppearance()
         self.rippleManager.clear()
     }
 
@@ -166,6 +169,23 @@ open class RippleViewCell: UICollectionViewCell {
     open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
         self.rippleManager.touchesEnded()
+    }
+
+    public func setAppearance() {
+        self.rippleContainerView.backgroundColor = currentTheme.colors.mainColor
+        self.backgroundColor = currentTheme.colors.mainColor
+    }
+
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        let newTheme: AppTheme
+        if traitCollection.userInterfaceStyle == .light {
+            newTheme = MainTheme(type: .light)
+        } else {
+            newTheme = MainTheme(type: .dark)
+        }
+        self.currentTheme = newTheme
+        MainTheme.shared = newTheme
+        self.setAppearance()
     }
 }
 

@@ -3,10 +3,15 @@ import UIKit
 // MARK: - View Controller
 
 final class OtherViewController: BaseViewController {
+    @IBOutlet weak var topLineView: UIView!
+    @IBOutlet weak var headContainer: UIView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var authButton: UIButton!
     @IBOutlet var linksStakView: UIStackView!
 	@IBOutlet var historyView: UIView!
+    @IBOutlet var teamView: UIView!
+    @IBOutlet var supportView: UIView!
+    @IBOutlet var settingsView: UIView!
 
     var handler: OtherEventHandler!
 
@@ -39,6 +44,26 @@ final class OtherViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
+    override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+        self.userNameLabel.textColor = colors.mainTextColor
+        self.authButton.setTitleColor(colors.mainTextColor, for: .normal)
+        self.linksStakView.backgroundColor = colors.secondaryBackgroundColor
+        self.historyView.backgroundColor = colors.secondaryBackgroundColor
+        self.headContainer.backgroundColor = colors.mainColor
+        self.topLineView.backgroundColor = colors.mainColor
+        self.teamView.backgroundColor = colors.secondaryBackgroundColor
+        self.supportView.backgroundColor = colors.secondaryBackgroundColor
+        self.settingsView.backgroundColor = colors.secondaryBackgroundColor
+
+        for item in linksStakView.subviews {
+            if let view = item as? LinkView {
+                view.setAppearance(colors: currentTheme.colors)
+            }
+        }
     }
 
     // MARK: - Actions
@@ -75,6 +100,7 @@ extension OtherViewController: OtherViewBehavior {
         let views = links.lazy.compactMap { item -> LinkView? in
             let view = LinkView.fromNib()
             view?.configure(item)
+            view?.setAppearance(colors: self.currentTheme.colors)
             view?.setTap { [weak self] in
                 self?.handler.tap(link: $0)
             }

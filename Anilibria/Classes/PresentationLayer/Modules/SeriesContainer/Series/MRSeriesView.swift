@@ -19,6 +19,7 @@ final class SeriesViewController: BaseViewController {
     @IBOutlet var supportLabel: UILabel!
     @IBOutlet var supportButton: UIButton!
     @IBOutlet var torrentsStackView: UIStackView!
+    @IBOutlet var separatorLineView: UIView!
 
     private var header: SeriesHeaderView!
 
@@ -49,21 +50,43 @@ final class SeriesViewController: BaseViewController {
 
         self.paramsTextView.setTapLink(handler: action)
         self.descTextView.setTapLink(handler: action)
-
-        self.paramsTextView.linkTextAttributes = [
-            .foregroundColor: MainTheme.shared.red,
-            .underlineColor: MainTheme.shared.red
-        ]
-
-        self.descTextView.linkTextAttributes = [
-            .foregroundColor: MainTheme.shared.red,
-            .underlineColor: MainTheme.shared.red
-        ]
+        self.setupTextView()
     }
 
     override func setupStrings() {
         super.setupStrings()
         self.supportLabel.text = L10n.Common.donatePls
+    }
+
+    override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+        self.setupTextView()
+        self.titleLabel.textColor = colors.mainTextColor
+        self.seconTitleLabel.textColor = colors.secondaryTextColor
+        self.scrollView.backgroundColor = colors.mainColor
+        self.separatorLineView.backgroundColor = colors.mainColor
+
+        for view in weekDayViews {
+            view.titleLabel.textColor = view.isSelected ? .white : colors.mainTextColor
+            view.backgroundColor = view.isSelected ? colors.noticeColor : colors.secondaryBackgroundColor
+        }
+    }
+
+    private func setupTextView() {
+        let colors = currentTheme.colors
+        self.paramsTextView.textColor = colors.mainTextColor
+        self.descTextView.textColor = colors.mainTextColor
+
+        self.paramsTextView.linkTextAttributes = [
+            .foregroundColor: currentTheme.colors.infoColor,
+            .underlineColor: currentTheme.colors.infoColor
+        ]
+
+        self.descTextView.linkTextAttributes = [
+            .foregroundColor: currentTheme.colors.infoColor,
+            .underlineColor: currentTheme.colors.infoColor
+        ]
     }
 
     private func setupHeader() {
@@ -102,8 +125,7 @@ extension SeriesViewController: SeriesViewBehavior {
     }
 
     func set(favorite: Bool, count: Int) {
-        let theme = MainTheme.shared
-        self.favoriteStarView.tintColor = favorite ? theme.darkRed : .darkGray
+        self.favoriteStarView.tintColor = favorite ? currentTheme.colors.noticeColor : .darkGray
         self.favoriteCountLabel.text = "\(count)"
     }
 
@@ -222,9 +244,10 @@ public final class WeekDayView: CircleView {
 
     var isSelected: Bool = false {
         didSet {
+            let colors = MainTheme.shared.colors
             if self.isSelected {
-                self.backgroundColor = MainTheme.shared.darkRed
-                self.titleLabel.textColor = MainTheme.shared.white
+                self.backgroundColor = colors.noticeColor
+                self.titleLabel.textColor = colors.mainTextColor
                 self.borderThickness = 0
             } else {
                 self.backgroundColor = .clear

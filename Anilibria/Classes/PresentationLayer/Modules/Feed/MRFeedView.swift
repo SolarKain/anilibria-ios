@@ -31,6 +31,16 @@ final class FeedViewController: InfinityCollectionViewController {
         self.collectionView.contentInset.top = 10
     }
 
+    override func setAppearance() {
+        super.setAppearance()
+        self.searchButton.updateTint(color: currentTheme.colors.mainTextColor)
+        #if targetEnvironment(macCatalyst)
+        self.refreshButton.updateTint(color: currentTheme.colors.mainTextColor)
+        #endif
+        self.collectionView.backgroundColor = currentTheme.colors.mainColor
+        self.update()
+    }
+
     override func setupStrings() {
         super.setupStrings()
         self.navigationItem.title = L10n.Screen.Feed.title

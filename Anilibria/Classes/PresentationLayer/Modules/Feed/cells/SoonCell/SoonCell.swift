@@ -1,6 +1,8 @@
 import UIKit
 
 final class SoonCell: BaseCollectionCell {
+    @IBOutlet weak var rightArrow: UILabel!
+    @IBOutlet weak var leftArrow: UILabel!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var leftView: UIView!
     @IBOutlet var rightView: UIView!
@@ -51,6 +53,17 @@ final class SoonCell: BaseCollectionCell {
             newOffset.x = endOffset
         }
         self.collectionView.setContentOffset(newOffset, animated: true)
+    }
+
+    override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+        self.titleLabel.textColor = colors.mainTextColor
+        self.collectionView.backgroundColor = colors.mainColor
+        self.rightView.subviews.first?.backgroundColor = colors.secondaryBackgroundColor
+        self.leftView.subviews.first?.backgroundColor = colors.secondaryBackgroundColor
+        self.rightArrow.textColor = colors.mainTextColor
+        self.leftArrow.textColor = colors.mainTextColor
     }
 
     private func getEndOffset() -> CGFloat {

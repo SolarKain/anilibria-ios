@@ -13,6 +13,21 @@ final class MainContainerViewController: BaseViewController, ChildNavigationCont
     override func viewDidLoad() {
         super.viewDidLoad()
         self.handler.didLoad()
+        self.setAppearance()
+    }
+
+    public override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+        self.menuTabBar.backgroundColor = colors.mainColor
+        self.menuTabBar.superview?.backgroundColor = colors.mainColor
+        self.childContainerView?.backgroundColor = colors.mainColor
+
+        for item in self.menuTabBar.subviews {
+            if let view = item as? MenuItemView {
+                view.setAppearance(colors: colors)
+            }
+        }
     }
 }
 

@@ -24,6 +24,13 @@ public final class SeriesCell: RippleViewCell {
         } else {
             self.descLabel.text = ""
         }
+        self.setAppearance()
+    }
+
+    public override func setAppearance() {
+        self.rippleContainerView.backgroundColor = currentTheme.colors.secondaryBackgroundColor
+        self.titleLabel.textColor = currentTheme.colors.mainTextColor
+        self.descLabel.textColor = currentTheme.colors.secondaryTextColor
     }
 
     public override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

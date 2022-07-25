@@ -55,7 +55,7 @@ class BaseCollectionViewController: BaseViewController, ListAdapterDataSource {
 
     // MARK: - Refresh
 
-    public func addRefreshControl(color: UIColor = MainTheme.shared.black) {
+    public func addRefreshControl(color: UIColor = MainTheme.shared.colors.secondaryBackgroundColor) {
         if self.refreshControl != nil {
             return
         }

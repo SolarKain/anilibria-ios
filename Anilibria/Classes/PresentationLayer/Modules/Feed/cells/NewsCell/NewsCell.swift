@@ -17,8 +17,18 @@ public final class NewsCell: RippleViewCell {
         self.viewsCountLabel.text = "\(item.views)"
         self.imageView.setImage(from: item.image,
                                 placeholder: UIImage(named: "img_placeholder"))
-        self.viewsIconView.tintColor = .darkGray
-        self.commentsIconView.tintColor = .darkGray
+        self.setAppearance()
+    }
+
+    public override func setAppearance() {
+        super.setAppearance()
+        let colors = currentTheme.colors
+        self.rippleContainerView.backgroundColor = colors.secondaryBackgroundColor
+        self.titleLabel.textColor = colors.mainTextColor
+        self.viewsCountLabel.textColor = colors.secondaryTextColor
+        self.commentsCountLabel.textColor = colors.secondaryTextColor
+        self.viewsIconView.tintColor = colors.subviewsColor
+        self.commentsIconView.tintColor = colors.subviewsColor
     }
 
     static func height(for item: News, with width: CGFloat) -> CGFloat {

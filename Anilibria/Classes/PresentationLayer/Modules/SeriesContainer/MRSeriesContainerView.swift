@@ -37,6 +37,7 @@ final class SeriesContainerViewController: BaseViewController {
                          imageEdge: inset(8, 0, 10, 0)) { [weak self, weak item] in
                             self?.handler.share(sourceView: item?.customView)
         }
+        item.updateTint(color: currentTheme.colors.mainTextColor)
         self.navigationItem.setRightBarButtonItems([item], animated: false)
     }
 
@@ -53,6 +54,12 @@ final class SeriesContainerViewController: BaseViewController {
             .gestureRecognizers?
             .first { $0 is UIScreenEdgePanGestureRecognizer } as? UIScreenEdgePanGestureRecognizer
         self.pagerView.require(gesture: gesture)
+    }
+
+    override func setAppearance() {
+        super.setAppearance()
+        self.setupNavigationButtons()
+        self.pagerView.setTitleColor(colors: currentTheme.colors)
     }
 
     private func updateState() {

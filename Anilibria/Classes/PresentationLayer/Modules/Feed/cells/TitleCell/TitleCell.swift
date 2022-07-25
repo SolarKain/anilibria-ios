@@ -5,6 +5,11 @@ public final class TitleCell: UICollectionViewCell {
 
     func configure(_ item: String) {
         self.titleLabel.text = item
+        self.setAppearance()
+    }
+
+    func setAppearance() {
+        self.titleLabel.textColor = MainTheme.shared.colors.mainTextColor
     }
 
     public override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
